@@ -34,9 +34,11 @@ public class ScoreDatabase {
      * @throws SQLException
      */
     public void createTables() throws SQLException {
-        stmt.execute("CREATE TABLE IF NOT EXISTS player(id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(64)"
-        +", score VARCHAR(24), goal VARCHAR(7))");
-        //caps dont matter but makes a new students table with
+        stmt.execute("CREATE TABLE IF NOT EXISTS player(id INT "
+                +"PRIMARY KEY AUTO_INCREMENT, name VARCHAR(64)"
+            +", score VARCHAR(24), goal VARCHAR(7))");
+        //caps dont matter but makes a new player table with
+        //id, name, score, goal
 
     }
 
@@ -72,9 +74,9 @@ public class ScoreDatabase {
      * @return arraylist with ShowScores objects
      * @throws SQLException
      */
-    public ArrayList<ShowScores> getScores() throws SQLException {
+    public ArrayList<ShowScore> getScores() throws SQLException {
         //make new arraylist
-        ArrayList<ShowScores> scores = new ArrayList<>();
+        ArrayList<ShowScore> scores = new ArrayList<>();
         ResultSet temp;
         //get the NAME and SCORE of the player in descending order
         String sql = "SELECT name, score FROM player ORDER BY score DESC";
@@ -84,7 +86,8 @@ public class ScoreDatabase {
         //when there are still names/scores in the resultset, make a ShowScore with that info
         //add to showscores arraylist to be returned
         while (temp.next()) {
-            ShowScores s = new ShowScores(temp.getInt("score"),temp.getString("name"));
+            ShowScore s = new ShowScore(temp.getInt("score"),
+                    temp.getString("name"));
             scores.add(s);
         }
         return scores;
@@ -95,8 +98,8 @@ public class ScoreDatabase {
      * @throws SQLException
      */
     public void printScores() throws SQLException {
-        ArrayList<ShowScores> scores = getScores();
-        for(ShowScores s : scores){
+        ArrayList<ShowScore> scores = getScores();
+        for(ShowScore s : scores){
             s.printToConsole();
         }
     }

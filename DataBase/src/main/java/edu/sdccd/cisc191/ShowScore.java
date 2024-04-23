@@ -3,14 +3,14 @@ package edu.sdccd.cisc191;
 /**
  * ShowSCores object with score ad name
  */
-public class ShowScores {
+public class ShowScore {
     private int score;
     private String name;
 
     /**
      * default ShowScores obj
      */
-    public ShowScores(){
+    public ShowScore(){
         score =0;
         name = "None";
     }
@@ -20,7 +20,7 @@ public class ShowScores {
      * @param score
      * @param name
      */
-    public ShowScores(int score, String name){
+    public ShowScore(int score, String name){
         this.score =score;
         this.name = name;
     }
